@@ -15,9 +15,12 @@ const Sidebar = () => {
     setHistoryByIdLoading,
     historyData,
     setHistoryData,
+    selectedHistoryId,
+    setSelectedHistoryId,
+    selectedUserId,
+    setSelectedUserId,
   } = useSidebarState()
   const [isDeleteLoading, setDeleteLoading] = useState(false)
-  const [selectedHistoryId, setSelectedHistoryId] = useState("")
 
   function generateTabIdWithSuffix(suffix) {
     return (
@@ -56,10 +59,10 @@ const Sidebar = () => {
     }
   }
 
-  const historyFetchById = async (session_id) => {
+  const historyFetchById = async (session_id, user_id) => {
     let result = []
     setSelectedHistoryId(session_id)
-    // setSelectedUserId(user_id)
+    setSelectedUserId(user_id)
     setQuestion("open")
     try {
       setHistoryByIdLoading(true)
@@ -118,7 +121,9 @@ const Sidebar = () => {
                       }`}
                     >
                       <div
-                        onClick={() => historyFetchById(session.session_id)}
+                        onClick={() =>
+                          historyFetchById(session.session_id, session.user_id)
+                        }
                         className="px-2 py-3 w-full hover:text-[#ff0202]"
                       >
                         {session.title}
@@ -166,7 +171,7 @@ const Sidebar = () => {
             <hr className="bg-[#7faffd]" />
             <div>
               <div className="flex flex-col pt-8 ps-8 gap-2 text-sm text-white">
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <span className="pe-2">
                     <svg
                       width="19"
@@ -184,7 +189,7 @@ const Sidebar = () => {
                     </svg>
                   </span>
                   Chat
-                </div>
+                </div> */}
                 <button
                   type="button"
                   className="flex items-center cursor-pointer disabled:pointer-events-none"
@@ -209,7 +214,7 @@ const Sidebar = () => {
                   </span>
                   Upload
                 </button>
-                <div className="flex items-center">
+                {/* <div className="flex items-center">
                   <span className="pe-2">
                     <svg
                       width="19"
@@ -235,7 +240,7 @@ const Sidebar = () => {
                     </svg>
                   </span>
                   Settings
-                </div>
+                </div> */}
               </div>
               <div className="pt-10 pb-8 ps-4 text-white">
                 <p>@ EBIW | All right reserved</p>

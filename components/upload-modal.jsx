@@ -42,22 +42,23 @@ const UploadModal = () => {
 
   const handleOk = () => {
     setSelectedFiles([])
+    setUploadSuccessful(false)
   }
   return (
     <div
       id="hs-vertically-centered-modal"
-      className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto"
+      className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
     >
       <div
         className={`hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all ${
           uploadSuccessful ? "max-w-2xl" : "max-w-6xl"
         }  w-full m-3 mx-auto min-h-[calc(100%-3.5rem)] flex items-center`}
       >
-        <div className="w-full flex flex-col bg-[#E8F4FD] border shadow-sm rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+        <div className="w-full flex flex-col pointer-events-auto bg-[#E8F4FD] border shadow-sm rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
           <div className="flex cursor-pointer justify-end items-center py-3 px-4 dark:border-gray-700">
             <button
               type="button"
-              className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+              className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
               data-hs-overlay="#hs-vertically-centered-modal"
             >
               <span className="sr-only">Close</span>
@@ -127,7 +128,7 @@ const UploadModal = () => {
                     htmlFor="fileInput"
                     className="cursor-pointer rounded-full bg-[#2174FF] text-center text-white mt-14 p-4 w-32 mx-auto"
                   >
-                    Brows
+                    Browse
                   </label>
                   <input
                     type="file"
@@ -197,7 +198,7 @@ const UploadModal = () => {
                   </div>
                   <button
                     disabled={selectedFiles.length === 0 ? true : false}
-                    className={`rounded-full disabled:opacity-50 disabled:pointer-events-none bg-[#2174FF] text-center text-white ${
+                    className={`rounded-full disabled:opacity-50 bg-[#2174FF] text-center text-white ${
                       selectedFiles.length === 0 ? "mt-[93px]" : "mt-4"
                     } pb-2`}
                   >

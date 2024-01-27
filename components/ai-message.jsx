@@ -19,7 +19,12 @@ const AIMessage = ({ answer }) => {
         </svg>
         <p className="font-bold text-lg ps-3 pt-1">AI Gen</p>
       </div>
-      <p className="ms-10 pb-4 px-4">{answer.answer}</p>
+      <p
+        className="ms-10 pb-4 px-4 text-wrap"
+        style={{ whiteSpaceCollapse: "preserve-breaks" }}
+      >
+        {answer.answer}
+      </p>
     </div>
   )
 }

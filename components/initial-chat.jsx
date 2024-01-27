@@ -6,8 +6,8 @@ const Initial = () => {
           Chat With Your Data
         </div>
       </div>
-      <div className="h-[65vh] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-[#cccfd6] [&::-webkit-scrollbar-thumb]:bg-[#67696b]">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-24 px-4">
+      <div className="h-[50vh] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-[#cccfd6] [&::-webkit-scrollbar-thumb]:bg-[#67696b]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-20 px-4">
           <div className="md:w-1/3 h-full bg-[#021634] rounded-md p-6">
             <div className="flex items-center ">
               <span className="pe-3">
@@ -28,14 +28,26 @@ const Initial = () => {
               </span>
               <p className="text-[#2E70DD] text-lg pt-1">Examples</p>
             </div>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-white text-xs text-justify py-3">
+              Healthcare: Symptom Checker Chatbots: In healthcare applications
+              to assist users in assessing symptoms, providing initial
+              information, and recommending appropriate actions. Digitize manual
+              patient forms , summarize and generate content for chatbots
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-white text-xs text-justify py-3">
+              Content summarization and creation: Our solution can summarize
+              news articles, blog posts, or other textual content, providing
+              users with concise overviews of longer pieces of information.
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-white text-xs text-justify py-3">
+              Legal: This solution can assist legal professionals and
+              researchers by providing information, summarizing legal documents,
+              and generating content for legal writing including legal papers
+              and inputs for a predictive interpretation.
+            </p>
+            <p className="text-white text-xs text-justify py-3">
+              Endless Applications in the Insurance , Tourism , Personal
+              Assistant etc domains
             </p>
           </div>
           <div className="md:w-1/3 h-full bg-[#021634] rounded-md p-6">
@@ -56,14 +68,25 @@ const Initial = () => {
               </span>
               <p className="text-[#2E70DD] text-lg pt-1">Capabilities</p>
             </div>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              The solution is capable of answering a wide variety of questions,
+              ranging from factual queries to more complex inquiries. They can
+              provide information on general knowledge topics based on the
+              training data.
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              Our solution can summarize long passages of text into shorter,
+              more concise versions while retaining the essential information.
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              The solution is able to reference and incorporate information from
+              previous parts of the conversation to provide more contextually
+              relevant answers
+            </p>
+            <p className="text-xs text-justify text-white py-3">
+              Our solution can understand and interpret large volumes of natural
+              language input, including context, syntax, and semantics. They can
+              grasp the meaning of user queries and generate relevant responses.
             </p>
           </div>
           <div className="md:w-1/3 h-full bg-[#021634] rounded-md p-6">
@@ -88,14 +111,25 @@ const Initial = () => {
               </span>
               <p className="text-[#2E70DD] text-lg pt-1">Limitations</p>
             </div>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              LLM models are trained on a diverse range of data, but they may
+              need proper training with highly specialized or domain-specific
+              queries
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              Training and running large language models like GPT will require
+              substantial computing resources.
             </p>
-            <p className="text-white py-3">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. →
+            <p className="text-xs text-justify text-white py-3">
+              The model&#39;s responses can be sensitive to changes in input
+              phrasing and prompts. A slight rephrase of a question may result
+              in a different response.
+            </p>
+            <p className="text-xs text-justify text-white py-3">
+              LLMs generate responses based on patterns learned from data, but
+              they may not truly understand the content. The same may require
+              contextualization by users for a consistent domain specific
+              output.
             </p>
           </div>
         </div>

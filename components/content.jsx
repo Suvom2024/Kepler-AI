@@ -19,6 +19,8 @@ const Content = () => {
     setChatLoading,
     chatLoading,
     setHistoryData,
+    selectedUserId,
+    selectedHistoryId,
   } = useSidebarState()
 
   const fetchHistoryData = async () => {
@@ -34,20 +36,31 @@ const Content = () => {
     setInputValue("")
     const sessionId = sessionStorage.getItem("sessionId") || ""
     const userId = sessionStorage.getItem("userId") || ""
+
+    const headers = {
+      "Content-Type": "application/json",
+    }
+
+    // Only set the 'Tab-ID' header if tabId is not an empty string
+    if (sessionId) {
+      headers["Session-ID"] = sessionId
+    }
+    if (userId) {
+      headers["User-ID"] = userId
+    }
+
     try {
       setChatLoading(true)
       const history = answers.map((a) => ({ user: a[0], bot: a[1].answer }))
       const request = {
         history: [...history, { user: question, bot: undefined }],
         approach: "rrr",
-        session_id: sessionId,
-        user_id: userId,
+        session_id: selectedHistoryId,
+        user_id: selectedUserId,
       }
       const result = await fetch(`${url}/chat`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(request),
       })
       const parsedResponse = await result.json()
