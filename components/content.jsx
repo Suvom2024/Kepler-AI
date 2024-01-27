@@ -75,8 +75,12 @@ const Content = () => {
 
   return (
     <>
-      <div className={`flex ${open && "justify-center"}`}>
-        <div className="flex flex-col max-w-[1400px] w-full h-[90vh] md:ms-80">
+      <div className={`flex justify-center mx-10`}>
+        <div
+          className={`flex flex-col max-w-[1400px] w-full h-[90vh] ${
+            open ? "ms-80" : "md:ms-40"
+          } `}
+        >
           {question || answers.length !== 0 ? (
             <Chat
               answers={answers}

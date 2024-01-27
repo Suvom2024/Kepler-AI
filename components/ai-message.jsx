@@ -1,6 +1,11 @@
-import React from "react"
+// import {useMemo} from "react"
+import { parseAnswerToHtml } from "./AnswerParser"
+import DOMPurify from "dompurify"
 
 const AIMessage = ({ answer }) => {
+  const parsedAnswer = parseAnswerToHtml(answer.answer)
+  const sanitizedAnswerHtml = DOMPurify.sanitize(parsedAnswer.answerHtml)
+
   return (
     <div className="border-2 border-dashed rounded-lg border-[#c0c2c8] bg-[#e8f4fd] mb-10">
       <div className="flex items-center px-4">
@@ -19,12 +24,13 @@ const AIMessage = ({ answer }) => {
         </svg>
         <p className="font-bold text-lg ps-3 pt-1">AI Gen</p>
       </div>
-      <p
-        className="ms-10 pb-4 px-4 text-wrap"
+      <div
+        className="answerText ms-10 pb-4 px-4 text-wrap"
         style={{ whiteSpaceCollapse: "preserve-breaks" }}
+        dangerouslySetInnerHTML={{ __html: sanitizedAnswerHtml }}
       >
-        {answer.answer}
-      </p>
+        {/* {parseAnswerToHtml(sanitizedAnswerHtml)} */}
+      </div>
     </div>
   )
 }

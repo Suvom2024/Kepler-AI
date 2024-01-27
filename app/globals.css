@@ -18,6 +18,26 @@
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
+
+.answerText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  white-space: pre-line;
+}
+
+.answerText table {
+  border-collapse: collapse;
+}
+
+.answerText td,
+.answerText th {
+  border: 1px solid;
+  padding: 5px;
+}
+
 @keyframes lds-ripple {
   0% {
     top: 36px;
