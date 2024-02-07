@@ -8,7 +8,7 @@ const Initial = () => {
       </div>
       <div className="h-[60vh] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-[#cccfd6] [&::-webkit-scrollbar-thumb]:bg-[#67696b]">
         <div className="flex flex-col md:flex-row items-stretch justify-between gap-8 pt-10 px-4">
-          <div className="md:w-1/3 min-h-full bg-[#021634] rounded-md p-6">
+          <div className="md:w-1/2 min-h-full bg-[#021634] rounded-md p-6">
             <div className="flex items-center ">
               <span className="pe-3">
                 <svg
@@ -29,25 +29,27 @@ const Initial = () => {
               <p className="text-[#2E70DD] text-lg pt-1">Examples</p>
             </div>
             <p className="text-white text-xs text-justify py-3">
-              Symptom Checker Chatbots assess symptoms, provide initial
-              information, and recommend actions.
+              -The solution is capable of answering a wide variety of questions,
+              ranging from factual queries to more complex inquiries. They can
+              provide information on general knowledge topics based on the
+              training data.
             </p>
             <p className="text-white text-xs text-justify py-3">
-              Digitizes manual patient forms and generates content for chatbots.
+              Our solution can summarize long passages of text into shorter,
+              more concise versions while retaining the essential information.
             </p>
             <p className="text-white text-xs text-justify py-3">
-              Capable of content summarization in healthcare applications.{" "}
+              The solution is able to reference and incorporate information from
+              previous parts of the conversation to provide more contextually
+              relevant answers
             </p>
             <p className="text-white text-xs text-justify py-3">
-              Summarizes news articles, blog posts, or textual content,
-              providing concise overviews.
-            </p>
-            <p className="text-white text-xs text-justify py-3">
-              Assists legal professionals by providing information, summarizing
-              legal documents, and generating content for legal writing.
+              The solution can understand and interpret large volumes of natural
+              language input, including context, syntax, and semantics. They can
+              grasp the meaning of user queries and generate relevant responses.
             </p>
           </div>
-          <div className="md:w-1/3 min-h-full bg-[#021634] rounded-md p-6">
+          <div className="md:w-1/2 min-h-full bg-[#021634] rounded-md p-6">
             <div className="flex items-center ">
               <span className="pe-3">
                 <svg
@@ -66,60 +68,26 @@ const Initial = () => {
               <p className="text-[#2E70DD] text-lg pt-1">Capabilities</p>
             </div>
             <p className="text-xs text-justify text-white py-3">
-              Can answer a broad range of questions, from factual to complex,
-              based on training data.
+              Tourism: The solution can be used as a virtual agent for tour
+              operators, customers as well as Tourism officials for generating
+              answers to queries, give insights of trend and future business
+              advices based on the data analysis.
             </p>
             <p className="text-xs text-justify text-white py-3">
-              Summarizes long passages into concise versions while retaining
-              essential information.
+              Content Creation: Our tool can turn manual forms into digital
+              forms, summarize information, and generate content . It&#39;s
+              handy for creating brief summaries of news articles, blog posts,
+              or other text.
             </p>
             <p className="text-xs text-justify text-white py-3">
-              References previous parts of a conversation for more contextually
-              relevant answers.
+              Legal: For legal professionals and researchers, our solution
+              provides information, summarizes legal documents, and generates
+              content for legal writing, like legal papers and input for
+              predictions.
             </p>
             <p className="text-xs text-justify text-white py-3">
-              Understands and interprets natural language input, including
-              context, syntax, and semantics.
-            </p>
-          </div>
-          <div className="md:w-1/3 min-h-full bg-[#021634] rounded-md p-6">
-            <div className="flex items-center ">
-              <span className="pe-3">
-                <svg
-                  width="19"
-                  height="17"
-                  viewBox="0 0 19 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10.3284 12.8416C10.3284 13.0613 10.2411 13.272 10.0858 13.4273C9.93044 13.5826 9.71978 13.6699 9.50011 13.6699C9.28045 13.6699 9.06979 13.5826 8.91446 13.4273C8.75914 13.272 8.67188 13.0613 8.67188 12.8416C8.67188 12.622 8.75914 12.4113 8.91446 12.256C9.06979 12.1007 9.28045 12.0134 9.50011 12.0134C9.71978 12.0134 9.93044 12.1007 10.0858 12.256C10.2411 12.4113 10.3284 12.622 10.3284 12.8416ZM10.1213 6.00866C10.1213 5.84391 10.0558 5.68591 9.93935 5.56942C9.82286 5.45293 9.66486 5.38748 9.50011 5.38748C9.33537 5.38748 9.17737 5.45293 9.06087 5.56942C8.94438 5.68591 8.87893 5.84391 8.87893 6.00866V9.73574C8.87893 9.90048 8.94438 10.0585 9.06087 10.175C9.17737 10.2915 9.33537 10.3569 9.50011 10.3569C9.66486 10.3569 9.82286 10.2915 9.93935 10.175C10.0558 10.0585 10.1213 9.90048 10.1213 9.73574V6.00866Z"
-                    fill="#FF0202"
-                  />
-                  <path
-                    d="M7.70775 1.03426C8.50534 -0.344754 10.4948 -0.344754 11.2924 1.03426L18.7192 13.8753C19.5168 15.256 18.5204 16.9828 16.926 16.9828H2.07407C0.478877 16.9828 -0.516666 15.256 0.280928 13.8753L7.70775 1.03426ZM10.2173 1.65627C10.1443 1.53079 10.0396 1.42667 9.91374 1.35429C9.78788 1.28192 9.64524 1.24383 9.50005 1.24383C9.35487 1.24383 9.21222 1.28192 9.08636 1.35429C8.9605 1.42667 8.85583 1.53079 8.7828 1.65627L1.35681 14.4973C1.28444 14.6233 1.24643 14.7661 1.24658 14.9114C1.24672 15.0567 1.28502 15.1994 1.35764 15.3253C1.43025 15.4512 1.53465 15.5558 1.66037 15.6286C1.7861 15.7015 1.92875 15.7401 2.07407 15.7405H16.926C17.0712 15.74 17.2138 15.7014 17.3394 15.6286C17.465 15.5558 17.5693 15.4513 17.6419 15.3255C17.7145 15.1998 17.7528 15.0572 17.7531 14.912C17.7533 14.7668 17.7155 14.6241 17.6433 14.4981L10.2173 1.65627Z"
-                    fill="#FF0202"
-                  />
-                </svg>
-              </span>
-              <p className="text-[#2E70DD] text-lg pt-1">Limitations</p>
-            </div>
-            <p className="text-xs text-justify text-white py-3">
-              LLM models may require specialized training for domain-specific
-              queries.
-            </p>
-            <p className="text-xs text-justify text-white py-3">
-              Training and running large language models demand substantial
-              computing resources.
-            </p>
-            <p className="text-xs text-justify text-white py-3">
-              Responses can be sensitive to changes in input phrasing, requiring
-              careful consideration.
-            </p>
-            <p className="text-xs text-justify text-white py-3">
-              LLMs generate responses based on learned patterns but may lack
-              true understanding, necessitating user contextualization for
-              consistent domain-specific output.
+              Various Uses: Our solution can be used in insurance, tourism,
+              personal assistant, Recruitment agencies and many other areas
             </p>
           </div>
         </div>
