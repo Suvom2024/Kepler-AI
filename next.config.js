@@ -1,17 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Comment out the images configuration to test
   // images: {
-  //   domains: ["images.unsplash.com"],
+  //   remotePatterns: [
+  //     {
+  //       protocol: "https",
+  //       hostname: "images.unsplash.com",
+  //       pathname: "**",
+  //     },
+  //   ],
   // },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "**",
-      },
-    ],
-  },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
