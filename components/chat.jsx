@@ -1,16 +1,37 @@
 "use client"
 
-import { useEffect } from "react"
+import { useState, useEffect, useRef } from "react";
 import UserChatMessage from "./user-chat-message"
 import AIMessage from "./ai-message"
 
 const Chat = ({ answers, historyByIdLoading, chatLoading, question }) => {
+  const [streamedAnswer, setStreamedAnswer] = useState("");
+  const answerRef = useRef(null);
+
   useEffect(() => {
-    const chatContainer = document.querySelector(".chat-stream")
+    const chatContainer = document.querySelector(".chat-stream");
     if (chatContainer) {
-      chatContainer.scrollTop = chatContainer.scrollHeight
+      chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-  }, [chatLoading])
+  }, [chatLoading]);
+
+  useEffect(() => {
+    const streamAnswer = async () => {
+      if (answerRef.current) {
+        const chunks = answerRef.current.answer.answer.split(/\b/);
+        setStreamedAnswer("");
+        for (const chunk of chunks) {
+          setStreamedAnswer((prevAnswer) => prevAnswer + chunk);
+          await new Promise((resolve) => setTimeout(resolve, 50)); // Adjust the delay as needed
+        }
+      }
+    };
+
+    if (answerRef.current) {
+      streamAnswer();
+    }
+  }, [answerRef.current]);
+
   return (
     <>
       {historyByIdLoading ? (
@@ -26,20 +47,23 @@ const Chat = ({ answers, historyByIdLoading, chatLoading, question }) => {
             {answers.map((answer, index) => (
               <div key={index}>
                 <UserChatMessage message={answer[0]} />
-                <AIMessage key={index} answer={answer[1]} />
+                <AIMessage answer={answer[1]} images={answer[1].images} />
               </div>
             ))}
             {chatLoading && (
               <>
                 <UserChatMessage message={question} />
-                <AIMessage answer={{ answer: "Loading..." }} />
+                <AIMessage
+                  answer={{ answer: streamedAnswer || "Loading..." }}
+                  ref={answerRef}
+                />
               </>
             )}
           </div>
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export default Chat

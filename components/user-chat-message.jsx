@@ -64,23 +64,15 @@ const UserChatMessage = ({ message }) => {
   return (
     <div className="mb-10">
       <div className="flex items-center px-4">
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="15" cy="15" r="15" fill="#FF0202" />
-          <path
-            d="M13.76 22V16.34L8.84 8H11.64L15.64 15.1H14.44L18.44 8H21.24L16.32 16.34V22H13.76Z"
-            fill="white"
-          />
-        </svg>
+      <div className="bg-white rounded-full p-1">
+
+      <img src="https://img.icons8.com/color/48/user.png" alt="User Icon" width="30" height="30" />
+      </div>
+
         <p className="font-bold text-lg ps-3">You</p>
-        <button
+        {/* <button
           onClick={() => saveQuestionHandler(message)}
-          className="ms-auto border-2 rounded-lg border-[#2174FF] text-[#2E70DD] w-14 text-sm p-1"
+          className="ms-auto border-2 rounded-lg border-[#2174FF] text-[#1F1F38] w-14 text-sm p-1"
         >
           {loading ? (
             <div
@@ -93,7 +85,7 @@ const UserChatMessage = ({ message }) => {
           ) : (
             <p>SAVE</p>
           )}
-        </button>
+        </button> */}
       </div>
       <p className="ms-14">{message}</p>
     </div>

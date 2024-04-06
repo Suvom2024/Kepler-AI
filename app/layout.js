@@ -6,8 +6,8 @@ import UploadModal from "@/components/upload-modal"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Generative AI",
-  description: "Generative AI by EBIW",
+  title: "Kepler AI",
+  description: "By Reader AI Team",
 }
 
 export default function RootLayout({ children }) {

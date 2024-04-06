@@ -1,48 +1,17 @@
-// import { renderToStaticMarkup } from "react-dom/server";
-// import { getCitationFilePath } from "../../api";
+export function parseAnswerToHtml(answer, images) {
+  let parsedAnswer = answer || '';
+  let imageHtml = '';
 
-export function parseAnswerToHtml(answer) {
-  // Convert **text** to <strong>text</strong>
-  let parsedAnswer = answer.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+  // Process the answer text
+  parsedAnswer = parsedAnswer.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  parsedAnswer = parsedAnswer.trim();
 
-  // Extract any follow-up questions that might be in the answer
-  //   parsedAnswer = parsedAnswer.replace(/<<([^>>]+)>>/g, (match, content) => {
-  //     followupQuestions.push(content)
-  //     return ""
-  //   })
-
-  // Trim any whitespace from the end of the answer after removing follow-up questions
-  parsedAnswer = parsedAnswer.trim()
-
-  const parts = parsedAnswer.split(/\[([^\]]+)\]/g)
-
-  const fragments = parts.map((part, index) => {
-    if (index % 2 === 0) {
-      return part
-    }
-
-    // else {
-    //     let citationIndex;
-    //     if (citations.indexOf(part) !== -1) {
-    //         citationIndex = citations.indexOf(part) + 1;
-    //     } else {
-    //         citations.push(part);
-    //         citationIndex = citations.length;
-    //     }
-
-    //     const path = getCitationFilePath(part);
-
-    //     return renderToStaticMarkup(
-    //         <a className="supContainer" title={part} onClick={() => onCitationClicked(path)}>
-    //             <sup>{citationIndex}</sup>
-    //         </a>
-    //     );
-    // }
-  })
+  // If images are provided, create image HTML strings
+  if (images && images.length > 0) {
+    imageHtml = images.map(image => `<img src="data:image/png;base64,${image}" alt="Response Image" style="max-width: 100%; height: auto; display: block; margin: 10px 0;" />`).join('');
+  }
 
   return {
-    answerHtml: fragments.join(""),
-    // citations,
-    // followupQuestions
-  }
+    answerHtml: parsedAnswer + imageHtml, // Append the image HTML after the answer
+  };
 }

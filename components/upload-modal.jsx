@@ -2,12 +2,13 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import { uploadFiles } from "@/actions/file-upload"
+import { uploadFiles, convertToJSON } from "@/actions/file-upload"
 
 const UploadModal = () => {
   const [selectedFiles, setSelectedFiles] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [uploadSuccessful, setUploadSuccessful] = useState(false)
+  const [activeTab, setActiveTab] = useState("Q/A")
 
   const handleFileChange = (e) => {
     const newFiles = e.target.files
@@ -31,7 +32,11 @@ const UploadModal = () => {
     if (!selectedFiles) return
     setIsLoading(true)
     try {
-      await uploadFiles(selectedFiles)
+      if (activeTab === "Q/A") {
+        await uploadFiles(selectedFiles)
+      } else {
+        await convertToJSON(selectedFiles)
+      }
       setUploadSuccessful(true)
     } catch (e) {
       alert(e)
@@ -44,24 +49,30 @@ const UploadModal = () => {
     setSelectedFiles([])
     setUploadSuccessful(false)
   }
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab)
+    setSelectedFiles([])
+    setUploadSuccessful(false)
+  }
   return (
     <div
-      id="hs-vertically-centered-modal"
-      className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
+    id="hs-vertically-centered-modal"
+    className="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
+  >
+    <div
+      className={`hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all ${
+        uploadSuccessful ? "max-w-2xl" : "max-w-6xl"
+      }  w-full m-3 mx-auto min-h-[calc(100%-3.5rem)] flex items-center`}
     >
-      <div
-        className={`hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all ${
-          uploadSuccessful ? "max-w-2xl" : "max-w-6xl"
-        }  w-full m-3 mx-auto min-h-[calc(100%-3.5rem)] flex items-center`}
-      >
-        <div className="w-full flex flex-col pointer-events-auto bg-[#E8F4FD] border shadow-sm rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
-          <div className="flex cursor-pointer justify-end items-center py-3 px-4 dark:border-gray-700">
-            <button
-              type="button"
-              className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-              data-hs-overlay="#hs-vertically-centered-modal"
-            >
-              <span className="sr-only">Close</span>
+      <div className="w-full flex flex-col pointer-events-auto bg-[#F7E8D3] border shadow-sm rounded-3xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+        <div className="flex cursor-pointer justify-end items-center py-3 px-4 dark:border-gray-700">
+          <button
+            type="button"
+            className="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            data-hs-overlay="#hs-vertically-centered-modal"
+          >
+            <span className="sr-only">Close</span>
               <svg
                 width="26"
                 height="26"
@@ -77,79 +88,98 @@ const UploadModal = () => {
                   strokeLinejoin="round"
                 />
               </svg>
+              </button>
+          </div>
+          <div className="flex justify-center gap-8 mb-4">
+            <button
+              className={`text-lg font-semibold ${
+                activeTab === "Q/A" ? "text-[#1F1F38]" : "text-gray-400"
+              }`}
+              onClick={() => handleTabChange("Q/A")}
+            >
+              Q/A
+            </button>
+            <button
+              className={`text-lg font-semibold ${
+                activeTab === "Data Analysis" ? "text-[#1F1F38]" : "text-gray-400"
+              }`}
+              onClick={() => handleTabChange("Data Analysis")}
+            >
+              Data Analysis
             </button>
           </div>
           {uploadSuccessful && selectedFiles.length !== 0 ? (
             <div className="flex flex-col items-center justify-center gap-5">
-              <svg
-                width="46"
-                height="46"
-                viewBox="0 0 46 46"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M0 23C0 16.9 2.42321 11.0499 6.73654 6.73654C11.0499 2.42321 16.9 0 23 0C29.1 0 34.9501 2.42321 39.2635 6.73654C43.5768 11.0499 46 16.9 46 23C46 29.1 43.5768 34.9501 39.2635 39.2635C34.9501 43.5768 29.1 46 23 46C16.9 46 11.0499 43.5768 6.73654 39.2635C2.42321 34.9501 0 29.1 0 23ZM21.6875 32.844L34.9293 16.2901L32.5373 14.3765L21.2459 28.4863L13.248 21.8224L11.2853 24.1776L21.6875 32.844Z"
-                  fill="#2E70DD"
-                />
-              </svg>
-              <div className="font-bold text-3xl">
-                {selectedFiles.length} file(s) uploaded Successfully
-              </div>
-              <button
-                data-hs-overlay="#hs-vertically-centered-modal"
-                className="px-4 py-2 bg-[#347DF6] text-white rounded-lg mt-2 mb-10"
-                onClick={() => handleOk()}
-              >
-                OK
-              </button>
-            </div>
+            <svg
+             width="46"
+             height="46"
+             viewBox="0 0 46 46"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg"
+           >
+             <path
+               fillRule="evenodd"
+               clipRule="evenodd"
+               d="M0 23C0 16.9 2.42321 11.0499 6.73654 6.73654C11.0499 2.42321 16.9 0 23 0C29.1 0 34.9501 2.42321 39.2635 6.73654C43.5768 11.0499 46 16.9 46 23C46 29.1 43.5768 34.9501 39.2635 39.2635C34.9501 43.5768 29.1 46 23 46C16.9 46 11.0499 43.5768 6.73654 39.2635C2.42321 34.9501 0 29.1 0 23ZM21.6875 32.844L34.9293 16.2901L32.5373 14.3765L21.2459 28.4863L13.248 21.8224L11.2853 24.1776L21.6875 32.844Z"
+               fill="#F7E8D3"
+             />
+           </svg>
+           <div className="font-bold text-3xl">
+             {selectedFiles.length} file(s) uploaded Successfully
+           </div>
+           <button
+             data-hs-overlay="#hs-vertically-centered-modal"
+             className="px-4 py-2 bg-[#347DF6] text-white rounded-lg mt-2 mb-10"
+             onClick={() => handleOk()}
+           >
+             OK
+           </button>
+         </div>
           ) : (
             <div className="flex flex-col md:flex-row justify-between gap-5 px-8 pb-8">
               <div className="w-full md:w-1/2">
-                <div className="font-bold text-[#2E70DD] text-2xl">
-                  Add New Files & Objects
+                <div className="font-bold text-[#1F1F38] text-2xl">
+                  {activeTab === "Q/A"
+                    ? "Add New Files & Objects"
+                    : "Add New Data Files"}
                 </div>
                 <p className="text-sm py-5">
-                  Documents and attachments that have been uploaded as part of
-                  your projects
+                  {activeTab === "Q/A"
+                    ? "Documents and attachments that have been uploaded as part of your projects"
+                    : "Upload CSV files for data analysis"}
                 </p>
-                <div className="flex flex-col justify-center border-2 border-dashed rounded-lg border-[#c0c2c8] px-20 py-10">
-                  <div className="text-center font-semibold text-[#737A82]">
-                    Click button below or drag file to upload
+                <div className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg border-[#1F1F38] px-20 py-10">
+                  <div className="text-center font-semibold text-[#1F1F38]">
+                    Drag and drop files here or click to browse
                   </div>
-                  <p className="pt-5 text-[#2174FF] text-sm text-center tracking-tight">
-                    Any assets used in projects will live here. Start creating
-                    by uploading your files
-                  </p>
-                  <label
-                    htmlFor="fileInput"
-                    className="cursor-pointer rounded-full bg-[#2174FF] text-center text-white mt-14 p-4 w-32 mx-auto"
-                  >
-                    Browse
-                  </label>
                   <input
                     type="file"
                     multiple
-                    accept="application/pdf"
+                    accept={activeTab === "Q/A" ? "application/pdf" : "text/csv"}
                     id="fileInput"
                     className="hidden"
                     onChange={handleFileChange}
+                    key={activeTab}
                   />
+                  <label
+                    htmlFor="fileInput"
+                    className="cursor-pointer rounded-full bg-[#1F1F38] text-center text-white mt-10 p-4 w-32"
+                  >
+                    Browse
+                  </label>
                 </div>
               </div>
               <div className="w-full md:w-1/2">
-                <div className="font-bold text-[#2E70DD] text-2xl">
+                <div className="font-bold text-[#1F1F38] text-2xl">
                   Uploaded Files
                 </div>
                 <p className="text-sm py-5">
-                  Nulla convallis viverra imperdiet. Donec interdum porta
-                  congue.
+                  {activeTab === "Q/A"
+                    ? "Nulla convallis viverra imperdiet. Donec interdum porta congue."
+                    : "Uploaded CSV files for data analysis"}
                 </p>
-                <div className="flex flex-col justify-center border-2 border-dashed rounded-lg border-[#c0c2c8] px-20 pt-8 pb-4">
-                  <div className="text-center font-semibold text-[#737A82] mb-6">
+                <div className="flex flex-col justify-center border-2 border-dashed rounded-lg border-[#1F1F38] px-20 pt-8 pb-4">
+                  <div className="text-center font-semibold text-[#1F1F38] mb-6">
                     Selected Files
                   </div>
                   <div className="flex gap-3 pb-2 mb-4 overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-[#cccfd6] [&::-webkit-scrollbar-thumb]:bg-[#67696b]">
@@ -179,13 +209,13 @@ const UploadModal = () => {
                                   strokeLinejoin="round"
                                 />
                               </svg>
-                            </div>
+                              </div>
                             <div className="pb-2">
                               <Image
-                                src="/icons/pdf.png"
+                                src={activeTab === "Q/A" ? "/icons/pdf.png" : "/icons/csv.png"}
                                 width={28}
                                 height={28}
-                                alt="pdf logo"
+                                alt={activeTab === "Q/A" ? "pdf logo" : "csv logo"}
                               />
                             </div>
                             <p className="text-xs text-[#838F9C] truncate w-28 px-6 pb-2">
@@ -198,7 +228,7 @@ const UploadModal = () => {
                   </div>
                   <button
                     disabled={selectedFiles.length === 0 ? true : false}
-                    className={`rounded-full disabled:opacity-50 bg-[#2174FF] text-center text-white ${
+                    className={`rounded-full disabled:opacity-50 bg-[#1F1F38] text-center text-white ${
                       selectedFiles.length === 0 ? "mt-[93px]" : "mt-4"
                     } pb-2`}
                   >
@@ -213,7 +243,7 @@ const UploadModal = () => {
                     ) : (
                       <p
                         onClick={() => onUploadClick()}
-                        className="w-full h-full p-4"
+                        className="w-full h-full p-4 bg-[#1F1F38] text-white rounded-full cursor-pointer flex items-center justify-center"
                       >
                         Upload
                       </p>
